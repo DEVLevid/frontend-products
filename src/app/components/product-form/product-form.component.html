@@ -1,0 +1,74 @@
+<form nz-form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzXs]="24" [nzSm]="12">
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true" nzFor="name">Nome</nz-form-label>
+        <nz-form-control [nzErrorTip]="'Nome é obrigatório'">
+          <input
+            nz-input
+            formControlName="name"
+            id="name"
+            placeholder="Digite o nome do produto"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzXs]="24" [nzSm]="12">
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true" nzFor="price">Preço</nz-form-label>
+        <nz-form-control [nzErrorTip]="'Preço deve ser maior ou igual a 0'">
+          <nz-input-number
+            formControlName="price"
+            [nzMin]="0"
+            [nzStep]="0.01"
+            [nzPrecision]="2"
+            style="width: 100%"
+            id="price"
+            placeholder="0.00"
+          ></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true" nzFor="description"
+          >Descrição</nz-form-label
+        >
+        <nz-form-control [nzErrorTip]="'Descrição é obrigatória'">
+          <textarea
+            nz-input
+            formControlName="description"
+            id="description"
+            rows="3"
+            placeholder="Descreva o produto"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div class="mt-4 flex gap-2">
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="isLoading"
+      [disabled]="form.invalid"
+      type="submit"
+    >
+      <span *ngIf="!isEdit; else ed">Cadastrar</span>
+      <ng-template #ed>Atualizar</ng-template>
+    </button>
+
+    <button
+      nz-button
+      nzType="default"
+      (click)="onCancel()"
+      [disabled]="isLoading"
+      type="button"
+    >
+      Cancelar
+    </button>
+  </div>
+</form>

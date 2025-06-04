@@ -1,16 +1,37 @@
-import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
-import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
-import { FormsModule } from '@angular/forms';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 
-registerLocaleData(en);
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideNzI18n(en_US), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient()]
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    provideAnimations(),
+    NzMessageService,
+
+    importProvidersFrom(
+      FormsModule,
+      ReactiveFormsModule,
+      NzFormModule,
+      NzInputModule,
+      NzButtonModule,
+      NzMessageModule,
+      NzLayoutModule,
+      NzInputNumberModule,
+      NzGridModule,
+      NzTableModule
+    ),
+  ],
 };

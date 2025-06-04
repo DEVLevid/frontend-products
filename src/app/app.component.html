@@ -1,4 +1,15 @@
-<!-- NG-ZORRO -->
-<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
-  <img height="300" alt="logo" src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg">
-</a>
+<nz-layout>
+  <nz-header>
+    <h1 style="color: white;">Gerenciamento de Produtos</h1>
+  </nz-header>
+
+  <nz-content style="padding: 24px;">
+    <app-product-list *ngIf="!showForm" (create)="onCreate()"></app-product-list>
+
+    <app-product-form
+      *ngIf="showForm"
+      (saved)="onFormSaved()"
+      (cancel)="onCancel()"
+    ></app-product-form>
+  </nz-content>
+</nz-layout>

@@ -3,6 +3,8 @@
 ## Visão Geral
 Este é um projeto frontend desenvolvido com Angular, utilizando o framework Ant Design (ng-zorro-antd) para a interface do usuário. O projeto é uma aplicação web moderna e responsiva para gerenciamento de produtos.
 
+![image](https://github.com/user-attachments/assets/59b668eb-52d7-4c88-a1ad-62bfdc91d297)
+
 ## Tecnologias Utilizadas
 
 ### Principais Tecnologias

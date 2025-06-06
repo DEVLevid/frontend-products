@@ -1,13 +1,10 @@
 <nz-table
-  [nzData]="products"
-  [nzPageSize]="5"
-  [nzFrontPagination]="true"
-  [nzShowSizeChanger]="false"
+  #basicTable
+  [nzData]="displayProducts"
   [nzLoading]="loading"
-  [nzScroll]="{ x: '768px' }"
-  [nzShowQuickJumper]="true"
-  [nzShowPagination]="products.length > 5"
   [nzNoResult]="'Nenhum produto encontrado.'"
+  [nzShowPagination]="false"
+  class="table"
 >
   <thead>
     <tr>
@@ -19,32 +16,30 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products">
+    <tr *ngFor="let product of displayProducts">
       <td>{{ product.name }}</td>
       <td>{{ product.description }}</td>
       <td>R$ {{ product.price | number: '1.2-2' }}</td>
-      <td>{{ product.createdAt | date: 'dd/MM/yyyy' }}</td>
-      <td>
-        <div class="flex gap-2">
+      <td>{{ product.registerDate | date:'dd/MM/yyyy HH:mm' }}</td>
+      <td class="actions">
+        <div class="flex gap-2 actions-wrapper">
           <button
-            nz-button
             nzType="primary"
             nzSize="small"
             (click)="edit(product)"
+            class="btn-action"
           >
-            <i nz-icon nzType="edit"></i>
-            Editar
+            <span class="icon" nz-icon nzType="edit" nzTheme="outline"></span>
           </button>
 
           <button
-            nz-button
             nzType="primary"
             nzDanger
             nzSize="small"
             (click)="delete(product?.id)"
+            class="btn-action"
           >
-            <i nz-icon nzType="delete"></i>
-            Excluir
+            <span class="icon" nz-icon nzType="delete" nzTheme="outline"></span>
           </button>
         </div>
       </td>
@@ -52,6 +47,17 @@
   </tbody>
 </nz-table>
 
+<div class="pagination-container">
+  <nz-pagination
+    [nzPageIndex]="pageIndex"
+    [nzPageSize]="5"
+    [nzTotal]="total"
+    [nzShowSizeChanger]="false"
+    [nzShowQuickJumper]="false"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+  ></nz-pagination>
+</div>
+
 <div class="mt-4">
-  <button nz-button nzType="primary" (click)="onCreateClick()">Novo Produto</button>
+  <button class="btn btn-add" nz-button nzType="primary" (click)="onCreateClick()">Novo Produto</button>
 </div>

@@ -1,22 +1,23 @@
-<form nz-form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
-  <div nz-row [nzGutter]="16">
-    <div nz-col [nzXs]="24" [nzSm]="12">
-      <nz-form-item>
-        <nz-form-label [nzRequired]="true" nzFor="name">Nome</nz-form-label>
+<form class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="input-wrapper">
+    <div class="input-wrapper-item">
+      <nz-form-item class="input-wrapper-item-form">
+        <nz-form-label class="input-wrapper-item-form-label" [nzRequired]="true" nzFor="name">Nome</nz-form-label>
         <nz-form-control [nzErrorTip]="'Nome é obrigatório'">
           <input
             nz-input
             formControlName="name"
             id="name"
             placeholder="Digite o nome do produto"
+            class="input-wrapper-item-form-input"
           />
         </nz-form-control>
       </nz-form-item>
     </div>
 
-    <div nz-col [nzXs]="24" [nzSm]="12">
-      <nz-form-item>
-        <nz-form-label [nzRequired]="true" nzFor="price">Preço</nz-form-label>
+    <div class="input-wrapper-item">
+      <nz-form-item class="input-wrapper-item-form">
+        <nz-form-label class="input-wrapper-item-form-label" [nzRequired]="true" nzFor="price">Preço</nz-form-label>
         <nz-form-control [nzErrorTip]="'Preço deve ser maior ou igual a 0'">
           <nz-input-number
             formControlName="price"
@@ -26,14 +27,15 @@
             style="width: 100%"
             id="price"
             placeholder="0.00"
+            class="input-wrapper-item-form-input"
           ></nz-input-number>
         </nz-form-control>
       </nz-form-item>
     </div>
 
-    <div nz-col [nzSpan]="24">
-      <nz-form-item>
-        <nz-form-label [nzRequired]="true" nzFor="description"
+    <div class="input-wrapper-item">
+      <nz-form-item class="input-wrapper-item-form">
+        <nz-form-label class="input-wrapper-item-form-label" [nzRequired]="true" nzFor="description"
           >Descrição</nz-form-label
         >
         <nz-form-control [nzErrorTip]="'Descrição é obrigatória'">
@@ -43,19 +45,21 @@
             id="description"
             rows="3"
             placeholder="Descreva o produto"
+            class="input-wrapper-item-form-input textarea"
           ></textarea>
         </nz-form-control>
       </nz-form-item>
     </div>
   </div>
 
-  <div class="mt-4 flex gap-2">
+  <div class="btn-wrapper mt-4 flex gap-2">
     <button
       nz-button
       nzType="primary"
       [nzLoading]="isLoading"
       [disabled]="form.invalid"
       type="submit"
+      class="btn btn-submit"
     >
       <span *ngIf="!isEdit; else ed">Cadastrar</span>
       <ng-template #ed>Atualizar</ng-template>
@@ -67,6 +71,7 @@
       (click)="onCancel()"
       [disabled]="isLoading"
       type="button"
+      class="btn btn-cancel"
     >
       Cancelar
     </button>

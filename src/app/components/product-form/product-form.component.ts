@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -17,6 +17,7 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   standalone: true,
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.scss'],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -29,18 +30,20 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   ],
 })
 export class ProductFormComponent implements OnInit {
-  @Input() product?: Product;
   form!: FormGroup;
   isEdit = false;
   productId?: number;
   isLoading = false;
+  product?: Product;
 
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
     private message: NzMessageService,
     private modalRef: NzModalRef
-  ) {}
+  ) {
+    this.product = this.modalRef.getConfig().nzData;
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -71,7 +74,8 @@ export class ProductFormComponent implements OnInit {
 
     const product: Product = {
       ...this.form.value,
-      createdAt: new Date().toISOString().split('T')[0],
+      id: this.productId,
+      registerDate: this.product?.registerDate || new Date().toISOString()
     };
 
     const obs = this.isEdit && this.productId != null

@@ -5,6 +5,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageService, NzMessageModule } from 'ng-zorro-antd/message';
 import { NzModalService, NzModalModule } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 import { Product } from '../../models/Product';
 import { ProductService } from '../../services/product.service';
@@ -13,6 +15,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -20,6 +23,8 @@ import { ProductFormComponent } from '../product-form/product-form.component';
     NzButtonModule,
     NzMessageModule,
     NzModalModule,
+    NzIconModule,
+    NzPaginationModule,
     ProductFormComponent,
   ],
 })
@@ -27,7 +32,11 @@ export class ProductListComponent implements OnInit {
   @Output() create = new EventEmitter<void>();
 
   products: Product[] = [];
+  displayProducts: Product[] = [];
   loading = false;
+  pageSize = 5;
+  pageIndex = 1;
+  total = 0;
 
   constructor(
     private productService: ProductService,
@@ -44,6 +53,8 @@ export class ProductListComponent implements OnInit {
     this.productService.getAll().subscribe({
       next: (data) => {
         this.products = data;
+        this.total = data.length;
+        this.updateDisplayProducts();
         this.loading = false;
       },
       error: () => {
@@ -51,6 +62,17 @@ export class ProductListComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  updateDisplayProducts(): void {
+    const startIndex = (this.pageIndex - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.displayProducts = this.products.slice(startIndex, endIndex);
+  }
+
+  onPageIndexChange(pageIndex: number): void {
+    this.pageIndex = pageIndex;
+    this.updateDisplayProducts();
   }
 
   onCreateClick(): void {
@@ -82,7 +104,7 @@ export class ProductListComponent implements OnInit {
   delete(id: number | undefined): void {
     if (!id) return;
     this.modal.confirm({
-      nzTitle: 'Tem certeza que deseja excluir este produto?',
+      nzTitle: 'Deseja excluir este produto?',
       nzContent: 'Esta ação não poderá ser desfeita.',
       nzOkText: 'Sim',
       nzOkType: 'primary',

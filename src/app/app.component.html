@@ -1,15 +1,11 @@
-<nz-layout>
-  <nz-header>
+<nz-layout class="container">
+  <nz-header class="header">
     <h1 style="color: white;">Gerenciamento de Produtos</h1>
   </nz-header>
 
-  <nz-content style="padding: 24px;">
+  <nz-content class="content">
     <app-product-list *ngIf="!showForm" (create)="onCreate()"></app-product-list>
 
-    <app-product-form
-      *ngIf="showForm"
-      (saved)="onFormSaved()"
-      (cancel)="onCancel()"
-    ></app-product-form>
+    <app-product-form *ngIf="showForm" (saved)="onFormSaved()" (cancel)="onCancel()"></app-product-form>
   </nz-content>
 </nz-layout>

@@ -18,3 +18,25 @@ button {
   font-weight: 400;
   font-size: 1rem;
 }
+
+.ant-modal {
+  .ant-modal-content {
+    border-radius: 4px;
+    padding: 1rem;
+  }
+
+  .ant-modal-header {
+    border-radius: 4px 4px 0 0;
+    margin-bottom: 1rem;
+  }
+
+  .ant-modal-body {
+    padding: 0;
+  }
+
+  .ant-modal-footer {
+    border-radius: 0 0 4px 4px;
+    margin-top: 1rem;
+  }
+
+} 

@@ -1,0 +1,84 @@
+.table {
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 1rem;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+
+    ::ng-deep {
+        .ant-pagination-options-quick-jumper {
+            display: none;
+        }
+    }
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+
+.btn {
+    border-radius: 4px;
+    background-color: rgb(19, 167, 19);
+    border: none;
+}
+
+.actions {
+    width: 120px;
+}
+
+.actions-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 4px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #010101;
+    cursor: pointer;
+    align-self: flex-end;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: transparent;
+        
+        .icon {
+            color: #1890ff;
+        }
+    }
+
+    &[nzDanger] {
+        &:hover {
+            .icon {
+                color: #ff4d4f;
+            }
+        }
+    }
+}
+
+.icon {
+    font-size: 1.2rem;
+    color: #010101;
+    transition: color 0.3s ease;
+}
+
+.btn-add {
+    margin-top: 2rem;
+}
+
+.btn:hover {
+    background-color: rgb(16, 126, 16);
+}
